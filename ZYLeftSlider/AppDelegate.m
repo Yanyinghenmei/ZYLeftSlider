@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "RootViewController.h"
+#import "ZYNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    _window.backgroundColor = [UIColor whiteColor];
+    
+    ZYNavigationController *nav = [[ZYNavigationController alloc] initWithRootViewController:[RootViewController new]];
+    _window.rootViewController = nav;
+    
+    [_window makeKeyAndVisible];
+    
     return YES;
 }
 

@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FirstViewController.h
 //  ZYLeftSlider
 //
 //  Created by Daniel on 15/12/18.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface FirstViewController : UIViewController
 
 @end
-
