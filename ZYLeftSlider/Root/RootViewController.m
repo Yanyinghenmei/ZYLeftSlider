@@ -34,11 +34,8 @@
     
     [self setControllers];
     
-    //绘制侧边栏
-    [self CreatLeftView];
-    
     //侧边栏手势
-    [(ZYNavigationController *)self.navigationController setLeftView:_leftView];
+    [(ZYNavigationController *)self.navigationController setLeftView:self.leftView];
 }
 
 - (void)hideAnimation {
@@ -62,50 +59,60 @@
 }
 
 #pragma mark -- leftView and delegate
-- (void)CreatLeftView {
+- (UITableView *)leftView {
+    if (!_leftView) {
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 180)];
+        headerView.backgroundColor = [UIColor whiteColor];
+        
+        UIButton *left = [[UIButton alloc] initWithFrame:CGRectMake(0, 32, 50, 20)];
+        left.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        left.tintColor = SelectedColor;
+        [left setImage:[[UIImage imageNamed:@"back.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [left addTarget:self action:@selector(hideAnimation) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *right = [[UIButton alloc] initWithFrame:CGRectMake(DeviceWidth-15-30, 27, 30, 30)];
+        [right setBackgroundImage:[[UIImage imageNamed:@"image5.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        right.tintColor = SelectedColor;
+        [headerView addSubview:left];
+        [headerView addSubview:right];
+        
+        _badgeBtn = [[IWBadgeButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(right.frame)-18, 20, 0, 0)];
+        _badgeBtn.badgeValue = @"1234";
+        [headerView addSubview:_badgeBtn];
+        
+        //180+60*4 = 420  为了尽可能地适配更多屏幕 需要计算
+        CGFloat footHeight = DeviceHeight-420;
+        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, footHeight)];
+        
+        UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, footHeight-90, DeviceWidth, 30)];
+        lab.font = [UIFont systemFontOfSize:10];
+        lab.textAlignment = NSTextAlignmentCenter;
+        lab.textColor = HEXCOLORV(0x999999);
+        lab.text = @"ZYLeftSlider 1.0\n–– Yanyinghenmei ––";
+        lab.numberOfLines = 0;
+        [footerView addSubview:lab];
+        
+        _leftView = [[UITableView alloc] initWithFrame:HideFrame style:UITableViewStylePlain];
+        _leftView.scrollEnabled = NO;
+        _leftView.backgroundColor = [UIColor whiteColor];
+        _leftView.delegate = self;
+        _leftView.dataSource = self;
+        _leftView.alpha = 0.95;
+        _leftView.tag = 142857;
+        _leftView.tableHeaderView = headerView;
+        _leftView.tableFooterView = footerView;
+        _leftView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_leftView reloadData];
+        [[[UIApplication sharedApplication].delegate window] addSubview:_leftView];
+    }
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 180)];
-    headerView.backgroundColor = [UIColor whiteColor];
+    //选中第一个cell
+    LeftItemCell *cell = [_leftView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    cell.selected = YES;
     
-    UIButton *left = [[UIButton alloc] initWithFrame:CGRectMake(0, 32, 50, 20)];
-    left.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [left setImage:[UIImage imageNamed:@"0-1"] forState:UIControlStateNormal];
-    [left addTarget:self action:@selector(hideAnimation) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *right = [[UIButton alloc] initWithFrame:CGRectMake(DeviceWidth-15-30, 27, 30, 30)];
-    [right setBackgroundImage:[UIImage imageNamed:@"1"] forState:UIControlStateNormal];
-    [headerView addSubview:left];
-    [headerView addSubview:right];
-    
-    _badgeBtn = [[IWBadgeButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(right.frame)-18, 20, 0, 0)];
-    _badgeBtn.badgeValue = @"1234";
-    [headerView addSubview:_badgeBtn];
-    
-    //180+60*4 = 420  为了尽可能地适配更多屏幕 需要计算
-    CGFloat footHeight = DeviceHeight-420;
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, footHeight)];
-    
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, footHeight-90, DeviceWidth, 30)];
-    lab.font = [UIFont systemFontOfSize:10];
-    lab.textAlignment = NSTextAlignmentCenter;
-    lab.textColor = HEXCOLORV(0x999999);
-    lab.text = @"ZYLeftSlider 1.0\n–– Yanyinghenmei ––";
-    lab.numberOfLines = 0;
-    [footerView addSubview:lab];
-    
-    _leftView = [[UITableView alloc] initWithFrame:HideFrame style:UITableViewStylePlain];
-    _leftView.scrollEnabled = NO;
-    _leftView.backgroundColor = [UIColor whiteColor];
-    _leftView.delegate = self;
-    _leftView.dataSource = self;
-    _leftView.alpha = 0.95;
-    _leftView.tag = 142857;
-    _leftView.tableHeaderView = headerView;
-    _leftView.tableFooterView = footerView;
-    _leftView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [_leftView reloadData];
-    [[[UIApplication sharedApplication].delegate window] addSubview:_leftView];
+    return _leftView;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _controllers.count;
 }
@@ -136,6 +143,10 @@
         [pushControllers removeObjectsInRange:NSMakeRange(1, pushControllers.count-1)];
         self.navigationController.viewControllers = pushControllers;
         [self.navigationController pushViewController:_controllers[indexPath.row] animated:NO];
+        
+        if (indexPath.row!=0) {
+            [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].selected = NO;
+        }
     }
 }
 
@@ -146,6 +157,11 @@
     } else {
         navigationController.interactivePopGestureRecognizer.enabled = YES;
     }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    self.leftView = nil;
 }
 
 @end

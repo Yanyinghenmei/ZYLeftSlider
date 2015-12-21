@@ -15,14 +15,14 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     if (selected) {
-        _icon.tintColor = HEXCOLORV(SelectedColor);
-        _titleLab.textColor = HEXCOLORV(SelectedColor);
-        _detailLab.textColor = HEXCOLORV(SelectedColor);
+        _icon.tintColor = SelectedColor;
+        _titleLab.textColor = SelectedColor;
+        _detailLab.textColor = SelectedColor;
         _badgeBtn.badgeValue = nil;
     } else {
-        _icon.tintColor = HEXCOLORV(NormalColor);
-        _titleLab.textColor = HEXCOLORV(NormalColor);
-        _detailLab.textColor = HEXCOLORV(NormalColor);
+        _icon.tintColor = NormalColor;
+        _titleLab.textColor = NormalColor;
+        _detailLab.textColor = NormalColor;
     }
 }
 

@@ -9,7 +9,10 @@
 #import "ZYNavigationController.h"
 #import "ZYHeader.h"
 
-#define Boundary 90 //滑动分界
+typedef NS_ENUM(BOOL, LeftCurrnetState) {
+    LeftCurrnetStateRight,
+    LeftCurrnetStateLeft
+};
 
 @interface ZYNavigationController ()
 @end
@@ -29,40 +32,36 @@
     [bar setTitleTextAttributes:attr];
     
     //按钮图片渲染
-    [bar setTintColor:HEXCOLORV(SelectedColor)];
+    [bar setTintColor:SelectedColor];
     
     //按钮属性
     UIBarButtonItem *item = [UIBarButtonItem appearance];
-    NSDictionary *itemAttr = @{NSForegroundColorAttributeName:HEXCOLORV(SelectedColor),NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    NSDictionary *itemAttr = @{NSForegroundColorAttributeName:SelectedColor,NSFontAttributeName:[UIFont systemFontOfSize:14]};
     [item setTitleTextAttributes:itemAttr forState:UIControlStateNormal];
-    [item setTintColor:HEXCOLORV(SelectedColor)];
+    [item setTintColor:SelectedColor];
 }
 
 //侧边栏
-- (void)setLeftViewControlWithView:(UIView *)view {
-    self.leftView = view;
-    [self setPanGes];
-}
 - (void)setLeftView:(UIView *)leftView {
     _leftView = leftView;
     [self setPanGes];
 }
 
 - (void)setPanGes {
-    _leftPanGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesClick:)];
+    if (!_leftPanGes) {
+        _leftPanGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesClick:)];
+    }
     [[[UIApplication sharedApplication].delegate window] addGestureRecognizer:_leftPanGes];
 }
 
 - (void)gesClick:(UIPanGestureRecognizer *)panGes {
     static CGFloat transX;   //相对于初始位置的坐标
-    static BOOL currentState;//初始移动方向
+    static BOOL currentState;//初始位置
     if (panGes.state == UIGestureRecognizerStateBegan) {
-        BOOL left = YES;
-        BOOL rigit = NO;
         if (_leftView.frame.origin.x == HideFrame.origin.x) {
-            currentState = left;
+            currentState = LeftCurrnetStateLeft;
         } else {
-            currentState = rigit;
+            currentState = LeftCurrnetStateRight;
         }
     }
     if (panGes.state == UIGestureRecognizerStateChanged) {//监听手指移动
@@ -126,7 +125,7 @@
         UIBarButtonItem *backitem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
         viewController.navigationItem.backBarButtonItem = backitem;
     } else {
-        UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"侧边栏" style:UIBarButtonItemStylePlain target:self action:@selector(showLeftAnimation)];
+        UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"left" style:UIBarButtonItemStylePlain target:self action:@selector(showLeftAnimation)];
         viewController.navigationItem.leftBarButtonItem= left;
     }
     

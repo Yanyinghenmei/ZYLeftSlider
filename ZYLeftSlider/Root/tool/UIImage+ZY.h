@@ -10,8 +10,6 @@
 
 @interface UIImage (ZY)
 
-+ (UIImage *)imageWithNamed:(NSString *)name;
-
 + (UIImage *)resizedImageWithNamed:(NSString *)name;
 
 @end

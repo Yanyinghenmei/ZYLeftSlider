@@ -38,7 +38,7 @@
         CGFloat badgeW = self.currentBackgroundImage.size.width;
         if (badgeValue.length > 1) {
             // 文字的尺寸
-            CGSize badgeSize = [badgeValue sizeWithFont:self.titleLabel.font];
+            CGSize badgeSize = [badgeValue sizeWithAttributes:@{NSFontAttributeName:self.titleLabel.font}];
             badgeW = badgeSize.width + 10;
         }
         frame.size.width = badgeW;
@@ -53,8 +53,8 @@
         CGRect frame = self.frame;
         CGFloat badgeH = self.currentBackgroundImage.size.height;
         CGFloat badgeW = self.currentBackgroundImage.size.width;
-            // 文字的尺寸
-            CGSize badgeSize = [@"99+" sizeWithFont:self.titleLabel.font];
+        // 文字的尺寸
+        CGSize badgeSize = [badgeValue sizeWithAttributes:@{NSFontAttributeName:self.titleLabel.font}];
             badgeW = badgeSize.width + 10;
         frame.size.width = badgeW;
         frame.size.height = badgeH;

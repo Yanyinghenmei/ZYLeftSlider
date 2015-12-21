@@ -18,6 +18,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"second";
+    
+    UILabel *lab = [[UILabel alloc] initWithFrame:self.view.bounds];
+    lab.text = self.title;
+    lab.font = [UIFont systemFontOfSize:38];
+    lab.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:lab];
 }
 
 - (void)didReceiveMemoryWarning {
