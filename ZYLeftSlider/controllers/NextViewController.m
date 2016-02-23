@@ -1,37 +1,29 @@
 //
-//  FirstViewController.m
+//  NextViewController.m
 //  ZYLeftSlider
 //
-//  Created by Daniel on 15/12/18.
-//  Copyright © 2015年 Daniel. All rights reserved.
+//  Created by Daniel on 16/2/23.
+//  Copyright © 2016年 Daniel. All rights reserved.
 //
 
-#import "FirstViewController.h"
 #import "NextViewController.h"
 
-@interface FirstViewController ()
+@interface NextViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation NextViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"first";
+    self.title = @"Next";
+    self.view.backgroundColor = [UIColor orangeColor];
     
     UILabel *lab = [[UILabel alloc] initWithFrame:self.view.bounds];
     lab.text = self.title;
     lab.font = [UIFont systemFontOfSize:38];
     lab.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:lab];
-    
-    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(nextController)];
-    self.navigationItem.rightBarButtonItem = right;
-}
-
-- (void)nextController {
-    [self.navigationController pushViewController:[NextViewController new] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -12,7 +12,7 @@
 #define DeviceWidth [UIScreen mainScreen].bounds.size.width
 #define DeviceHeight [UIScreen mainScreen].bounds.size.height
 
-//  5.获得hex颜色
+//16进制转化为RGB颜色
 #define HEXCOLORV(rgbValue) [UIColor \
 colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0x00FF00) >> 8))/255.0 \

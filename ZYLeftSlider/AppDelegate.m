@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "RootViewController.h"
+#import "RootTabBarViewController.h"
 #import "ZYNavigationController.h"
 
 @interface AppDelegate ()
@@ -22,8 +22,9 @@
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     _window.backgroundColor = [UIColor whiteColor];
     
-    ZYNavigationController *nav = [[ZYNavigationController alloc] initWithRootViewController:[RootViewController new]];
-    _window.rootViewController = nav;
+    RootTabBarViewController *tabBarVC = [[RootTabBarViewController alloc] init];
+    tabBarVC.selectViewControllerType = SelectViewControllerTypeRoot;
+    _window.rootViewController = tabBarVC;
     
     [_window makeKeyAndVisible];
     

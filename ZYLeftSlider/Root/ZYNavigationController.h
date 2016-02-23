@@ -9,12 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ZYNavigationController : UINavigationController
-
-//侧边栏
 @property(nonatomic,strong)UIView *leftView;
 @property(nonatomic,strong)UIPanGestureRecognizer *leftPanGes;
-
-//显示侧边栏
-- (void)showLeftAnimation;
 
 @end

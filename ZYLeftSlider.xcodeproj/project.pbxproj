@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65652CBF1C7C01F60076D3C3 /* RootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65652CBC1C7C01F60076D3C3 /* RootTabBarViewController.m */; settings = {ASSET_TAGS = (); }; };
+		65652CC01C7C01F60076D3C3 /* ZYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65652CBE1C7C01F60076D3C3 /* ZYNavigationController.m */; settings = {ASSET_TAGS = (); }; };
+		65652CC31C7C05230076D3C3 /* NextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65652CC21C7C05230076D3C3 /* NextViewController.m */; settings = {ASSET_TAGS = (); }; };
 		656A3A101C23F4390007EC45 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 656A3A0F1C23F4390007EC45 /* main.m */; };
 		656A3A131C23F4390007EC45 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 656A3A121C23F4390007EC45 /* AppDelegate.m */; };
 		656A3A191C23F4390007EC45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 656A3A171C23F4390007EC45 /* Main.storyboard */; };
@@ -14,10 +17,8 @@
 		656A3A1E1C23F4390007EC45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 656A3A1C1C23F4390007EC45 /* LaunchScreen.storyboard */; };
 		656A3A291C23F4390007EC45 /* ZYLeftSliderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 656A3A281C23F4390007EC45 /* ZYLeftSliderTests.m */; };
 		656A3A341C23F4390007EC45 /* ZYLeftSliderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 656A3A331C23F4390007EC45 /* ZYLeftSliderUITests.m */; };
-		656A3A4B1C23F4F70007EC45 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 656A3A431C23F4F70007EC45 /* RootViewController.m */; settings = {ASSET_TAGS = (); }; };
 		656A3A4C1C23F4F70007EC45 /* IWBadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 656A3A461C23F4F70007EC45 /* IWBadgeButton.m */; settings = {ASSET_TAGS = (); }; };
 		656A3A4D1C23F4F70007EC45 /* LeftItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 656A3A481C23F4F70007EC45 /* LeftItemCell.m */; settings = {ASSET_TAGS = (); }; };
-		656A3A4E1C23F4F70007EC45 /* ZYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 656A3A4A1C23F4F70007EC45 /* ZYNavigationController.m */; settings = {ASSET_TAGS = (); }; };
 		656A3A521C23F5390007EC45 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 656A3A511C23F5390007EC45 /* FirstViewController.m */; settings = {ASSET_TAGS = (); }; };
 		656A3A551C23F54B0007EC45 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 656A3A541C23F54B0007EC45 /* SecondViewController.m */; settings = {ASSET_TAGS = (); }; };
 		656A3A581C23F5570007EC45 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 656A3A571C23F5570007EC45 /* ThirdViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -51,6 +52,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		65652CBB1C7C01F60076D3C3 /* RootTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarViewController.h; sourceTree = "<group>"; };
+		65652CBC1C7C01F60076D3C3 /* RootTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarViewController.m; sourceTree = "<group>"; };
+		65652CBD1C7C01F60076D3C3 /* ZYNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNavigationController.h; sourceTree = "<group>"; };
+		65652CBE1C7C01F60076D3C3 /* ZYNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNavigationController.m; sourceTree = "<group>"; };
+		65652CC11C7C05230076D3C3 /* NextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextViewController.h; sourceTree = "<group>"; };
+		65652CC21C7C05230076D3C3 /* NextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextViewController.m; sourceTree = "<group>"; };
 		656A3A0B1C23F4390007EC45 /* ZYLeftSlider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZYLeftSlider.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		656A3A0F1C23F4390007EC45 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		656A3A111C23F4390007EC45 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -65,14 +72,10 @@
 		656A3A2F1C23F4390007EC45 /* ZYLeftSliderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZYLeftSliderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		656A3A331C23F4390007EC45 /* ZYLeftSliderUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYLeftSliderUITests.m; sourceTree = "<group>"; };
 		656A3A351C23F4390007EC45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		656A3A421C23F4F70007EC45 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		656A3A431C23F4F70007EC45 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		656A3A451C23F4F70007EC45 /* IWBadgeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWBadgeButton.h; sourceTree = "<group>"; };
 		656A3A461C23F4F70007EC45 /* IWBadgeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IWBadgeButton.m; sourceTree = "<group>"; };
 		656A3A471C23F4F70007EC45 /* LeftItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftItemCell.h; sourceTree = "<group>"; };
 		656A3A481C23F4F70007EC45 /* LeftItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftItemCell.m; sourceTree = "<group>"; };
-		656A3A491C23F4F70007EC45 /* ZYNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNavigationController.h; sourceTree = "<group>"; };
-		656A3A4A1C23F4F70007EC45 /* ZYNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNavigationController.m; sourceTree = "<group>"; };
 		656A3A501C23F5390007EC45 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		656A3A511C23F5390007EC45 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		656A3A531C23F54B0007EC45 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
@@ -188,10 +191,10 @@
 			isa = PBXGroup;
 			children = (
 				656A3A5D1C23F78E0007EC45 /* ZYHeader.h */,
-				656A3A421C23F4F70007EC45 /* RootViewController.h */,
-				656A3A431C23F4F70007EC45 /* RootViewController.m */,
-				656A3A491C23F4F70007EC45 /* ZYNavigationController.h */,
-				656A3A4A1C23F4F70007EC45 /* ZYNavigationController.m */,
+				65652CBB1C7C01F60076D3C3 /* RootTabBarViewController.h */,
+				65652CBC1C7C01F60076D3C3 /* RootTabBarViewController.m */,
+				65652CBD1C7C01F60076D3C3 /* ZYNavigationController.h */,
+				65652CBE1C7C01F60076D3C3 /* ZYNavigationController.m */,
 				656A3A5E1C23FA210007EC45 /* tool */,
 				656A3A441C23F4F70007EC45 /* view */,
 			);
@@ -220,6 +223,8 @@
 				656A3A571C23F5570007EC45 /* ThirdViewController.m */,
 				656A3A591C23F57D0007EC45 /* FourthViewController.h */,
 				656A3A5A1C23F57D0007EC45 /* FourthViewController.m */,
+				65652CC11C7C05230076D3C3 /* NextViewController.h */,
+				65652CC21C7C05230076D3C3 /* NextViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -387,13 +392,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				656A3A551C23F54B0007EC45 /* SecondViewController.m in Sources */,
+				65652CC31C7C05230076D3C3 /* NextViewController.m in Sources */,
 				656A3A4C1C23F4F70007EC45 /* IWBadgeButton.m in Sources */,
 				656A3A131C23F4390007EC45 /* AppDelegate.m in Sources */,
 				656A3A611C23FA4A0007EC45 /* UIImage+ZY.m in Sources */,
-				656A3A4B1C23F4F70007EC45 /* RootViewController.m in Sources */,
 				656A3A5B1C23F57D0007EC45 /* FourthViewController.m in Sources */,
-				656A3A4E1C23F4F70007EC45 /* ZYNavigationController.m in Sources */,
 				656A3A581C23F5570007EC45 /* ThirdViewController.m in Sources */,
+				65652CBF1C7C01F60076D3C3 /* RootTabBarViewController.m in Sources */,
+				65652CC01C7C01F60076D3C3 /* ZYNavigationController.m in Sources */,
 				656A3A101C23F4390007EC45 /* main.m in Sources */,
 				656A3A4D1C23F4F70007EC45 /* LeftItemCell.m in Sources */,
 				656A3A521C23F5390007EC45 /* FirstViewController.m in Sources */,
