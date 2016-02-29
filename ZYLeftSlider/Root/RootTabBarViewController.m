@@ -21,8 +21,6 @@
 
 #import "IWBadgeButton.h"
 
-#define Boundary 90 //滑动分界
-
 @interface RootTabBarViewController ()<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)NSArray *controllers;//控制器数组
 @property(nonatomic,strong)NSArray *leftItems;  //标题数组
@@ -39,20 +37,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setShadow];
+    
     [self setTabBar];
     [self setControllers];
     [self CreatLeftView];
     [self setPanGes];
 }
 
-- (void)setTabBar {
-    self.tabBar.hidden = YES;
+- (void)setShadow {
+    self.view.layer.shadowColor = HEXCOLORV(0xcccccc).CGColor;
+    self.view.layer.shadowOpacity = 1;
+    self.view.layer.shadowOffset = CGSizeMake(-4, 0);
+    self.view.layer.shadowRadius = 5;
 }
 
-- (void)hideAnimation {
-    [UIView animateWithDuration:0.5 animations:^{
-        _leftView.frame = HideFrame;
-    }];
+- (void)setTabBar {
+    self.tabBar.hidden = YES;
 }
 
 - (void)setControllers {
@@ -80,40 +81,40 @@
 
 #pragma mark -- leftView and delegate
 - (void)CreatLeftView {
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 180)];
-    headerView.backgroundColor = [UIColor whiteColor];
-    
-    CGFloat footHeight = DeviceHeight-420;
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, footHeight)];
-    
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, footHeight-120, DeviceWidth, 30)];
-    lab.font = [UIFont systemFontOfSize:10];
-    lab.textAlignment = NSTextAlignmentCenter;
-    lab.textColor = HEXCOLORV(0x999999);
-    lab.text = @"–– Yanyinghenmei ––";
-    lab.numberOfLines = 0;
-    [footerView addSubview:lab];
-    
-    _leftView = [[UITableView alloc] initWithFrame:HideFrame style:UITableViewStylePlain];
-    _leftView.scrollEnabled = NO;
-    _leftView.backgroundColor = [UIColor whiteColor];
-    _leftView.delegate = self;
-    _leftView.dataSource = self;
-    _leftView.alpha = 0.95;
-    _leftView.tag = 142857;
-    _leftView.tableHeaderView = headerView;
-    _leftView.tableFooterView = footerView;
-    _leftView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [_leftView reloadData];
-    [self.view addSubview:_leftView];
+    [[[UIApplication sharedApplication].delegate window] insertSubview:self.leftView belowSubview:self.view];
 }
 
-- (void)rightClick:(UIButton *)btn {
-    _badgeBtn.badgeValue = nil;
-    self.selectedIndex = 5;
-    [self hideAnimation];
+- (UITableView *)leftView {
+    if (!_leftView) {
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, LeftHideFrame.size.width, 180)];
+        headerView.backgroundColor = [UIColor whiteColor];
+        
+        CGFloat footHeight = DeviceHeight-420;
+        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, LeftHideFrame.size.width, footHeight)];
+        
+        UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, footHeight-120, LeftHideFrame.size.width, 30)];
+        lab.font = [UIFont systemFontOfSize:10];
+        lab.textAlignment = NSTextAlignmentCenter;
+        lab.textColor = HEXCOLORV(0x999999);
+        lab.text = @"–– Yanyinghenmei ––";
+        lab.numberOfLines = 0;
+        [footerView addSubview:lab];
+        
+        _leftView = [[UITableView alloc] initWithFrame:LeftHideFrame style:UITableViewStylePlain];
+        _leftView.scrollEnabled = NO;
+        _leftView.backgroundColor = [UIColor whiteColor];
+        _leftView.delegate = self;
+        _leftView.dataSource = self;
+        _leftView.alpha = 0.95;
+        _leftView.tag = 142857;
+        _leftView.tableHeaderView = headerView;
+        _leftView.tableFooterView = footerView;
+        _leftView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_leftView reloadData];
+    }
+    return _leftView;
 }
+
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -143,7 +144,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self hideAnimation];
+    [self leftSliderHideAnimation];
     
     // 侧边栏切换, 直接显示根视图 而不是之前push到的页面
     if (_selectViewControllerType == SelectViewControllerTypeRoot) {
@@ -172,7 +173,7 @@
     if (panGes.state == UIGestureRecognizerStateBegan) {
         BOOL left = YES;
         BOOL rigit = NO;
-        if (_leftView.frame.origin.x == HideFrame.origin.x) {
+        if (self.view.frame.origin.x == HideFrame.origin.x) {
             currentState = left;
         } else {
             currentState = rigit;
@@ -182,53 +183,84 @@
         transX = [panGes translationInView:panGes.view].x;//获取手指移动距离
         
         //跳过反向滑动
-        if (_leftView.frame.origin.x <= HideFrame.origin.x && transX<0) {
-            _leftView.frame = HideFrame;
+        if (self.view.frame.origin.x <= HideFrame.origin.x && transX<0) {
+            self.view.frame = HideFrame;
+            self.leftView.frame = LeftHideFrame;
             return;
-        } else if (_leftView.frame.origin.x >= ShowFrame.origin.x && transX>0) {
-            _leftView.frame = ShowFrame;
+        } else if (self.view.frame.origin.x >= ShowFrame.origin.x && transX>0) {
+            self.view.frame = ShowFrame;
+            self.leftView.frame = LeftShowFrame;
             return;
         }
         
         //View随手指移动
         if (currentState) {
-            [UIView animateWithDuration:0.2 animations:^{
+            [UIView animateWithDuration:0.1 animations:^{
                 CGRect frame = HideFrame;
                 frame.origin.x = HideFrame.origin.x + transX;
-                _leftView.frame = frame;
+                self.view.frame = frame;
+                
+                CGRect leftFrame = LeftHideFrame;
+                leftFrame.origin.x = LeftHideFrame.origin.x + transX/2;
+                self.leftView.frame = leftFrame;
             }];
         } else {
-            [UIView animateWithDuration:0.2 animations:^{
+            [UIView animateWithDuration:0.1 animations:^{
                 CGRect frame = ShowFrame;
                 frame.origin.x = ShowFrame.origin.x + transX;
-                _leftView.frame = frame;
+                self.view.frame = frame;
+                
+                CGRect leftFrame = LeftShowFrame;
+                leftFrame.origin.x = LeftShowFrame.origin.x + transX/2;
+                self.leftView.frame = leftFrame;
             }];
         }
     }
     //手指离开屏幕
     if (panGes.state == UIGestureRecognizerStateEnded) {
         if (transX>0) {
-            if (_leftView.frame.origin.x>=Boundary-DeviceWidth) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    _leftView.frame = ShowFrame;
+            if (self.view.frame.origin.x>=Boundary) {
+                [UIView animateWithDuration:.3 animations:^{
+                    self.view.frame = ShowFrame;
+                    self.leftView.frame = LeftShowFrame;
                 }];
-            } else if (_leftView.frame.origin.x<=Boundary-DeviceWidth) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    _leftView.frame = HideFrame;
+            } else if (self.view.frame.origin.x<=Boundary) {
+                [UIView animateWithDuration:.3 animations:^{
+                    self.view.frame = HideFrame;
+                    self.leftView.frame = LeftHideFrame;
                 }];
             }
         } else if (transX<0) {
-            if (_leftView.frame.origin.x>=Boundary) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    _leftView.frame = ShowFrame;
+            if (self.view.frame.origin.x>=LeftShowFrame.size.width - Boundary) {
+                [UIView animateWithDuration:.3 animations:^{
+                    self.view.frame = ShowFrame;
+                    self.leftView.frame = LeftShowFrame;
                 }];
-            } else if (_leftView.frame.origin.x<=Boundary) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    _leftView.frame = HideFrame;
+            } else if (self.view.frame.origin.x<=LeftShowFrame.size.width - Boundary) {
+                [UIView animateWithDuration:.3 animations:^{
+                    self.view.frame = HideFrame;
+                    self.leftView.frame = LeftHideFrame;
                 }];
             }
         }
     }
+}
+
+// 显示侧边栏
+- (void)leftSliderShowAnimation {
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.view.frame = ShowFrame;
+        self.leftView.frame = LeftShowFrame;
+    }];
+}
+
+// 隐藏侧边栏
+- (void)leftSliderHideAnimation {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.view.frame = HideFrame;
+        self.leftView.frame = LeftHideFrame;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

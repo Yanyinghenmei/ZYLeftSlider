@@ -28,22 +28,22 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        _icon = [[UIImageView alloc] initWithFrame:CGRectMake(40, 15, 30, 30)];
+        _icon = [[UIImageView alloc] initWithFrame:CGRectMake(20, 15, 30, 30)];
         _icon.layer.cornerRadius = 15;
         _icon.layer.masksToBounds = YES;
         [self.contentView addSubview:_icon];
         
-        _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_icon.frame)+15, 10, DeviceWidth-90, 20)];
+        _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_icon.frame)+15, 10, LeftHideFrame.size.width-70, 20)];
         _titleLab.font = [UIFont systemFontOfSize:17];
         _titleLab.textColor = HEXCOLORV(0x666666);
         [self.contentView addSubview:_titleLab];
         
-        _detailLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_icon.frame)+15, CGRectGetMaxY(_titleLab.frame), DeviceWidth-90, 20)];
+        _detailLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_icon.frame)+15, CGRectGetMaxY(_titleLab.frame), LeftHideFrame.size.width-70, 20)];
         _detailLab.font = [UIFont systemFontOfSize:13];
         _detailLab.textColor = HEXCOLORV(0x999999);
         [self.contentView addSubview:_detailLab];
         
-        _separator = [[UIView alloc] initWithFrame:CGRectMake(40, 60-0.5, DeviceWidth-80, 0.5)];
+        _separator = [[UIView alloc] initWithFrame:CGRectMake(20, 60-0.5, LeftHideFrame.size.width-40, 0.5)];
         _separator.backgroundColor = HEXCOLORV(0xcccccc);
         [self.contentView addSubview:_separator];
         

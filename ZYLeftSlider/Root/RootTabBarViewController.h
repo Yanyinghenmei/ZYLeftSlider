@@ -22,4 +22,9 @@ typedef NS_ENUM(NSInteger, SelectViewControllerType) {
  */
 @property(nonatomic,assign)SelectViewControllerType selectViewControllerType;
 
+// 显示侧边栏
+- (void)leftSliderShowAnimation;
+// 隐藏侧边栏
+- (void)leftSliderHideAnimation;
+
 @end
