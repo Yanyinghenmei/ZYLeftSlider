@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ZYNavigationController : UINavigationController
-@property(nonatomic,strong)UIView *leftView;
-@property(nonatomic,strong)UIPanGestureRecognizer *leftPanGes;
 
 @end

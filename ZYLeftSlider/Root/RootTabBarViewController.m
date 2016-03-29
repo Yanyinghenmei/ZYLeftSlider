@@ -110,7 +110,13 @@
         _leftView.tableHeaderView = headerView;
         _leftView.tableFooterView = footerView;
         _leftView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        //初始选中第一个cell-- reloadData一次 才能设置cell被选中
         [_leftView reloadData];
+        
+        UITableViewCell *cell = [(UITableView *)_leftView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        cell.selected = YES;
+        selectCellIndex = 0;
     }
     return _leftView;
 }
@@ -152,6 +158,13 @@
     }
     
     self.selectedIndex = indexPath.row;
+    
+    if (selectCellIndex != indexPath.row) {
+        NSIndexPath *path = [NSIndexPath indexPathForRow:selectCellIndex inSection:0];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:path];
+        cell.selected = NO;
+        selectCellIndex = indexPath.row;
+    }
 }
 
 - (void)lastNavPushToRootViewController {
