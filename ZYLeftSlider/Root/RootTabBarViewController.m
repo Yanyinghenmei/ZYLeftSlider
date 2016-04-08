@@ -34,15 +34,17 @@
     NSInteger selectCellIndex;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setShadow];
-    
-    [self setTabBar];
-    [self setControllers];
-    [self CreatLeftView];
-    [self setPanGes];
+- (instancetype)init {
+    if (self = [super init]) {
+        
+        [self setShadow];
+        
+        [self setTabBar];
+        [self setControllers];
+        [self CreatLeftView];
+        [self setPanGes];
+    }
+    return self;
 }
 
 - (void)setShadow {

@@ -14,9 +14,11 @@
 
 @implementation ZYNavigationController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self setNavigationBarTheme];
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
+    if (self = [super initWithRootViewController:rootViewController]) {
+        [self setNavigationBarTheme];
+    }
+    return self;
 }
 
 //主题
